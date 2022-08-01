@@ -15,7 +15,7 @@ public interface EmployeeDAO {
 
     // read
     Employee getOneEmployee(int id);
-    List<Employee> getAllEmployee();
+    List<Employee> getAllEmployees();
 
     // delete
     boolean deleteEmployee(int id);

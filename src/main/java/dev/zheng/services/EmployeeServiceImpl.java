@@ -1,7 +1,10 @@
 package dev.zheng.services;
 
+import dev.zheng.app.App;
 import dev.zheng.daos.EmployeeDAO;
 import dev.zheng.entities.Employee;
+
+import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService{
     private EmployeeDAO employeeDAO;
@@ -12,8 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee hireEmployee(Employee e) {
-        Employee savedEmployee = employeeDAO.createEmployee(e);
-        return savedEmployee;
+        return employeeDAO.createEmployee(e);
     }
 
     @Override
@@ -22,12 +24,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public boolean unHireEmployee(Employee e) {
-        return false;
+    public List<Employee> retrieveAllEmployees() {
+        return employeeDAO.getAllEmployees();
+    }
+
+    @Override
+    public boolean unHireEmployee(int id) {
+        return employeeDAO.deleteEmployee(id);
     }
 
     @Override
     public Employee modifyEmployee(Employee e) {
-        return null;
+        employeeDAO.updateEmployee(e);
+        return e;
     }
 }

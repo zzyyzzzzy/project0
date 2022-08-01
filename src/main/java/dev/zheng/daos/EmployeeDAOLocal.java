@@ -2,9 +2,7 @@ package dev.zheng.daos;
 
 import dev.zheng.entities.Employee;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EmployeeDAOLocal implements EmployeeDAO {
     static Map<Integer, Employee> employeeTables = new HashMap<>();
@@ -19,7 +17,8 @@ public class EmployeeDAOLocal implements EmployeeDAO {
 
     @Override
     public Employee updateEmployee(Employee e) {
-        return null;
+        employeeTables.put(e.getId(), e);
+        return e;
     }
 
     @Override
@@ -28,12 +27,18 @@ public class EmployeeDAOLocal implements EmployeeDAO {
     }
 
     @Override
-    public List<Employee> getAllEmployee() {
-        return null;
+    public List<Employee> getAllEmployees() {
+       Collection<Employee> allEmployeesValues=  employeeTables.values();
+       ArrayList<Employee> allEmployees = new ArrayList<>(allEmployeesValues);
+       return new ArrayList<>(allEmployees);
     }
 
     @Override
     public boolean deleteEmployee(int id) {
-        return false;
+        if(!employeeTables.containsKey(id)){
+            return false;
+        }
+        employeeTables.remove(id);
+        return true;
     }
 }

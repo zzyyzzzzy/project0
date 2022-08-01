@@ -3,6 +3,9 @@ import dev.zheng.daos.EmployeeDAOLocal;
 import dev.zheng.entities.Employee;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+import java.util.LongSummaryStatistics;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDAOTests {
 
@@ -32,21 +35,30 @@ public class EmployeeDAOTests {
     }
 
     @Test
-    @Order(3)
-    void update_employee_test(){
-
-    }
-
-    @Test
     @Order(4)
-    void get_all_employee_test(){
+    void update_employee_test(){
+        Employee e = new Employee(2, "gaven",
+                "chen", 933282205, "Front End Developer", "IT");
+        Employee updatedE = employeeDao.updateEmployee(e);
+        Assertions.assertEquals("Front End Developer", updatedE.getTitle());
+        Assertions.assertEquals(2, updatedE.getId());
 
     }
 
     @Test
     @Order(5)
-    void delete_employee_by_id_test(){
+    void get_all_employee_test(){
+        List<Employee> allEmployees = employeeDao.getAllEmployees();
+        Assertions.assertEquals(2, allEmployees.size());
+    }
 
+    @Test
+    @Order(6)
+    void delete_employee_by_id_test(){
+       boolean isDeletedExist = employeeDao.deleteEmployee(1);
+       boolean isDeletedNotExist = employeeDao.deleteEmployee(4);
+       Assertions.assertTrue(isDeletedExist);
+       Assertions.assertFalse(isDeletedNotExist);
     }
 
 }
