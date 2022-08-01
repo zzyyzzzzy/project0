@@ -1,4 +1,4 @@
-package dev.zheng.daos;
+package dev.zheng.daos.expenseDAO;
 
 import dev.zheng.entities.Expense;
 
@@ -8,10 +8,10 @@ public interface ExpenseDAO {
     // curd
 
     // create
-    Expense createEmployee(Expense e);
+    Expense createExpense(Expense e);
 
     // update
-    Expense updateEmployee(Expense e);
+    Expense updateExpense(Expense e);
 
     // read
     Expense getOneExpense(int id);

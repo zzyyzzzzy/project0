@@ -5,13 +5,16 @@ public class Expense {
     private int employeeId;
     private double amount;
     private String status;
+
+    private  String description;
     private long date;
 
-    public Expense(int id, int employeeId, double amount, String status, long date) {
+    public Expense(int id, int employeeId, double amount, String status, String description, long date) {
         this.id = id;
         this.employeeId = employeeId;
         this.amount = amount;
         this.status = status;
+        this.description = description;
         this.date = date;
     }
 
@@ -47,6 +50,14 @@ public class Expense {
         this.status = status;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public long getDate() {
         return date;
     }
@@ -62,6 +73,7 @@ public class Expense {
                 ", employeeId=" + employeeId +
                 ", amount=" + amount +
                 ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
                 ", date=" + date +
                 '}';
     }

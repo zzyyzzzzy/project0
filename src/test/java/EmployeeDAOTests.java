@@ -1,10 +1,9 @@
-import dev.zheng.daos.EmployeeDAO;
-import dev.zheng.daos.EmployeeDAOLocal;
+import dev.zheng.daos.employeeDAO.EmployeeDAO;
+import dev.zheng.daos.employeeDAO.EmployeeDAOLocal;
 import dev.zheng.entities.Employee;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
-import java.util.LongSummaryStatistics;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDAOTests {

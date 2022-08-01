@@ -1,7 +1,6 @@
-package dev.zheng.services;
+package dev.zheng.services.employeeService;
 
-import dev.zheng.app.App;
-import dev.zheng.daos.EmployeeDAO;
+import dev.zheng.daos.employeeDAO.EmployeeDAO;
 import dev.zheng.entities.Employee;
 
 import java.util.List;

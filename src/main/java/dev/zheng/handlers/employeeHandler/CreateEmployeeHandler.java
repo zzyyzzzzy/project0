@@ -1,9 +1,8 @@
-package dev.zheng.handlers;
+package dev.zheng.handlers.employeeHandler;
 
 import com.google.gson.Gson;
 import dev.zheng.app.App;
 import dev.zheng.entities.Employee;
-import dev.zheng.services.EmployeeService;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;

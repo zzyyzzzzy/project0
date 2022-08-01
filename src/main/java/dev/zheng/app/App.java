@@ -1,9 +1,9 @@
 package dev.zheng.app;
 
-import dev.zheng.daos.EmployeeDAOLocal;
-import dev.zheng.handlers.*;
-import dev.zheng.services.EmployeeService;
-import dev.zheng.services.EmployeeServiceImpl;
+import dev.zheng.daos.employeeDAO.EmployeeDAOLocal;
+import dev.zheng.handlers.employeeHandler.*;
+import dev.zheng.services.employeeService.EmployeeService;
+import dev.zheng.services.employeeService.EmployeeServiceImpl;
 import io.javalin.Javalin;
 
 public class App {
