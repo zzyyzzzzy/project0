@@ -1,10 +1,10 @@
 package dev.zheng.daos.expenseDAO;
 
+import dev.zheng.entities.Employee;
 import dev.zheng.entities.Expense;
+import dev.zheng.entities.Status;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ExpenseDAOLocal implements ExpenseDAO {
 
@@ -14,6 +14,7 @@ public class ExpenseDAOLocal implements ExpenseDAO {
     @Override
     public Expense createExpense(Expense e) {
         e.setId(id);
+        e.setStatus(Status.PENDING);
         expenseTable.put(e.getId(), e);
         id ++;
         return e;
@@ -21,17 +22,20 @@ public class ExpenseDAOLocal implements ExpenseDAO {
 
     @Override
     public Expense updateExpense(Expense e) {
-        return null;
+        expenseTable.put(e.getId(), e);
+        return e;
     }
 
     @Override
     public Expense getOneExpense(int id) {
-        return null;
+        return expenseTable.get(id);
     }
 
     @Override
     public List<Expense> getAllExpense() {
-        return null;
+        Collection<Expense> allExpenseValues =  expenseTable.values();
+        ArrayList<Expense> allExpense = new ArrayList<>(allExpenseValues);
+        return new ArrayList<>(allExpense);
     }
 
     @Override

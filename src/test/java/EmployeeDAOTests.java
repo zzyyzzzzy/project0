@@ -13,7 +13,7 @@ public class EmployeeDAOTests {
     @Order(1)
     void create_first_employee_test(){
         Employee e = new Employee(0, "zuojun",
-                "zheng", 964904605, "manger", "IT");
+                "zheng");
         Employee savedEmployee = employeeDao.createEmployee(e);
         Assertions.assertNotEquals(0, savedEmployee.getId());
     }
@@ -21,7 +21,7 @@ public class EmployeeDAOTests {
     @Order(2)
     void create_second_employee_test(){
         Employee e = new Employee(0, "gaven",
-                "chen", 933282205, "software engineer", "IT");
+                "chen");
         Employee savedEmployee = employeeDao.createEmployee(e);
         Assertions.assertNotEquals(1, savedEmployee.getId());
     }
@@ -37,9 +37,9 @@ public class EmployeeDAOTests {
     @Order(4)
     void update_employee_test(){
         Employee e = new Employee(2, "gaven",
-                "chen", 933282205, "Front End Developer", "IT");
+                "chen");
         Employee updatedE = employeeDao.updateEmployee(e);
-        Assertions.assertEquals("Front End Developer", updatedE.getTitle());
+        Assertions.assertEquals("gaven", updatedE.getFname());
         Assertions.assertEquals(2, updatedE.getId());
 
     }

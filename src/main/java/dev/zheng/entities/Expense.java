@@ -1,21 +1,19 @@
 package dev.zheng.entities;
 
 public class Expense {
+    // new enum for type - optional
     private int id;
     private int employeeId;
     private double amount;
-    private String status;
-
+    private Status status;
     private  String description;
-    private long date;
 
-    public Expense(int id, int employeeId, double amount, String status, String description, long date) {
+    public Expense(int id, int employeeId, double amount, Status status, String description) {
         this.id = id;
         this.employeeId = employeeId;
         this.amount = amount;
         this.status = status;
         this.description = description;
-        this.date = date;
     }
 
     public int getId() {
@@ -30,7 +28,7 @@ public class Expense {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployee(int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -42,39 +40,29 @@ public class Expense {
         this.amount = amount;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return "Expense{" +
                 "id=" + id +
-                ", employeeId=" + employeeId +
+                ", employee=" + employeeId +
                 ", amount=" + amount +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", description='" + description + '\'' +
-                ", date=" + date +
                 '}';
     }
+
 }
