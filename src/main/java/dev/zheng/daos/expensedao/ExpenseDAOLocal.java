@@ -1,6 +1,5 @@
-package dev.zheng.daos.expenseDAO;
+package dev.zheng.daos.expensedao;
 
-import dev.zheng.entities.Employee;
 import dev.zheng.entities.Expense;
 import dev.zheng.entities.Status;
 

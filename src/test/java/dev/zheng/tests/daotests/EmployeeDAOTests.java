@@ -1,14 +1,38 @@
-import dev.zheng.daos.employeeDAO.EmployeeDAO;
-import dev.zheng.daos.employeeDAO.EmployeeDAOLocal;
+package dev.zheng.tests.daotests;
+
+import dev.zheng.daos.employeedao.EmployeeDAO;
+import dev.zheng.daos.employeedao.EmployeeDaoPostgres;
 import dev.zheng.entities.Employee;
+import dev.zheng.utils.ConnectionUtil;
 import org.junit.jupiter.api.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDAOTests {
 
-    static EmployeeDAO employeeDao = new EmployeeDAOLocal();
+    static EmployeeDAO employeeDao = new EmployeeDaoPostgres();
+
+    @BeforeAll // this method will execute before any tests ordered or unordered
+    static void setup(){
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "create table employee(\n" +
+                    "\tid serial primary key,\n" +
+                    "\tfname varchar(100) not null,\n" +
+                    "\tlname varchar(100) not null\n" +
+                    ");";
+
+            Statement statement = conn.createStatement();
+            statement.execute(sql);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
     @Test
     @Order(1)
     void create_first_employee_test(){
@@ -23,7 +47,7 @@ public class EmployeeDAOTests {
         Employee e = new Employee(0, "gaven",
                 "chen");
         Employee savedEmployee = employeeDao.createEmployee(e);
-        Assertions.assertNotEquals(1, savedEmployee.getId());
+        Assertions.assertNotEquals(0, savedEmployee.getId());
     }
     @Test
     @Order(3)
@@ -58,6 +82,18 @@ public class EmployeeDAOTests {
        boolean isDeletedNotExist = employeeDao.deleteEmployee(4);
        Assertions.assertTrue(isDeletedExist);
        Assertions.assertFalse(isDeletedNotExist);
+    }
+
+    @AfterAll // runs after the last test finishes
+    static void teardown(){
+        try(Connection connection = ConnectionUtil.createConnection()){
+            String sql = "drop table employee";
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -2,13 +2,10 @@ package dev.zheng.handlers.expenseHandler;
 
 import com.google.gson.Gson;
 import dev.zheng.app.App;
-import dev.zheng.entities.Status;
-import dev.zheng.services.expenseService.expenseExceptions.InvalidStatusException;
+import dev.zheng.services.expenseservice.expenseexceptions.InvalidStatusException;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Locale;
 
 public class GetAllExpensesHandler implements Handler {
     @Override

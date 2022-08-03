@@ -1,13 +1,13 @@
-package dev.zheng.services.expenseService;
+package dev.zheng.services.expenseservice;
 
-import dev.zheng.daos.expenseDAO.ExpenseDAO;
+import dev.zheng.daos.expensedao.ExpenseDAO;
 import dev.zheng.entities.Expense;
 import dev.zheng.entities.Status;
-import dev.zheng.services.employeeService.employeeExceptions.InvalidEmployeeIdException;
-import dev.zheng.services.expenseService.expenseExceptions.EmptyDescriptionException;
-import dev.zheng.services.expenseService.expenseExceptions.IllegalAmountException;
-import dev.zheng.services.expenseService.expenseExceptions.InvalidStatusException;
-import dev.zheng.services.expenseService.expenseExceptions.UnModifiableExpenseException;
+import dev.zheng.services.employeeservice.employeeexceptions.InvalidEmployeeIdException;
+import dev.zheng.services.expenseservice.expenseexceptions.EmptyDescriptionException;
+import dev.zheng.services.expenseservice.expenseexceptions.IllegalAmountException;
+import dev.zheng.services.expenseservice.expenseexceptions.InvalidStatusException;
+import dev.zheng.services.expenseservice.expenseexceptions.UnModifiableExpenseException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,13 +76,12 @@ public class ExpenseServiceImpl implements ExpenseService{
 
         checkNullAndAmount(e);
         Expense oldExpense = expenseDAO.getOneExpense(e.getId());
-        // will also check if the status is invalid
-        if(e.getStatus() == null){
-            throw new InvalidStatusException("null status entered");
-        }
         if(oldExpense.getStatus() == Status.APPROVED || oldExpense.getStatus() == Status.DENIED){
             throw new UnModifiableExpenseException("This expense cannot be modified");
         }
+        // update request should not be able to change the status
+        // always change it to pending
+        e.setStatus(Status.PENDING);
         return expenseDAO.updateExpense(e);
     }
 

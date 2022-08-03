@@ -1,6 +1,7 @@
-import dev.zheng.daos.expenseDAO.ExpenseDAO;
-import dev.zheng.daos.expenseDAO.ExpenseDAOLocal;
-import dev.zheng.entities.Employee;
+package dev.zheng.tests.daotests;
+
+import dev.zheng.daos.expensedao.ExpenseDAO;
+import dev.zheng.daos.expensedao.ExpenseDAOLocal;
 import dev.zheng.entities.Expense;
 import dev.zheng.entities.Status;
 import org.junit.jupiter.api.*;
@@ -30,7 +31,7 @@ public class ExpenseDAOTests {
     void get_all_expense_test(){
         Expense e = new Expense(0, 2, 132, null, "hotel");
         expenseDAO.createExpense(e);
-        List<Expense> allExpense= expenseDAO.getAllExpense(null);
+        List<Expense> allExpense= expenseDAO.getAllExpense();
         Assertions.assertEquals(2, allExpense.size());
     }
     @Test

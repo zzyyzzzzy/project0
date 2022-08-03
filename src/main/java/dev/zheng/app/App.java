@@ -1,16 +1,16 @@
 package dev.zheng.app;
 
-import dev.zheng.daos.employeeDAO.EmployeeDAOLocal;
-import dev.zheng.daos.expenseDAO.ExpenseDAOLocal;
+import dev.zheng.daos.employeedao.EmployeeDAOLocal;
+import dev.zheng.daos.expensedao.ExpenseDAOLocal;
 import dev.zheng.handlers.employeeHandler.*;
 import dev.zheng.handlers.expenseHandler.CreateExpenseHandler;
 import dev.zheng.handlers.expenseHandler.GetAllExpensesHandler;
 import dev.zheng.handlers.expenseHandler.GetExpenseByIdHandler;
 import dev.zheng.handlers.expenseHandler.UpdateExpenseHandler;
-import dev.zheng.services.employeeService.EmployeeService;
-import dev.zheng.services.employeeService.EmployeeServiceImpl;
-import dev.zheng.services.expenseService.ExpenseService;
-import dev.zheng.services.expenseService.ExpenseServiceImpl;
+import dev.zheng.services.employeeservice.EmployeeService;
+import dev.zheng.services.employeeservice.EmployeeServiceImpl;
+import dev.zheng.services.expenseservice.ExpenseService;
+import dev.zheng.services.expenseservice.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
 public class App {

@@ -1,5 +1,7 @@
 package dev.zheng.entities;
 
+import java.util.Objects;
+
 public class Expense {
     // new enum for type - optional
     private int id;
@@ -65,4 +67,17 @@ public class Expense {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expense expense = (Expense) o;
+        return employeeId == expense.employeeId && Double.compare(expense.amount, amount) == 0
+                && status == expense.status && description.equals(expense.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId, amount, status, description);
+    }
 }

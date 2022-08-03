@@ -1,4 +1,4 @@
-package dev.zheng.services.expenseService;
+package dev.zheng.services.expenseservice;
 
 import dev.zheng.entities.Expense;
 

@@ -1,7 +1,8 @@
-package dev.zheng.services.employeeService;
+package dev.zheng.services.employeeservice;
 
-import dev.zheng.daos.employeeDAO.EmployeeDAO;
+import dev.zheng.daos.employeedao.EmployeeDAO;
 import dev.zheng.entities.Employee;
+import dev.zheng.services.employeeservice.employeeexceptions.NullNameException;
 
 import java.util.List;
 
@@ -12,8 +13,15 @@ public class EmployeeServiceImpl implements EmployeeService{
         this.employeeDAO = employeeDAO;
     }
 
+    private void checkNullName(Employee e){
+        if (e.getFname() == null || e.getLname() == null){
+            throw new NullNameException("Name cannot be empty");
+        }
+    }
+
     @Override
     public Employee hireEmployee(Employee e) {
+        checkNullName(e);
         return employeeDAO.createEmployee(e);
     }
 

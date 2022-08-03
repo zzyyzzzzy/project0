@@ -1,4 +1,4 @@
-package dev.zheng.services.expenseService.expenseExceptions;
+package dev.zheng.services.expenseservice.expenseexceptions;
 
 public class IllegalAmountException extends IllegalArgumentException{
     public IllegalAmountException(String message){

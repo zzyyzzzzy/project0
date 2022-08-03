@@ -1,4 +1,4 @@
-package dev.zheng.services.employeeService.employeeExceptions;
+package dev.zheng.services.employeeservice.employeeexceptions;
 
 public class InvalidEmployeeIdException extends IllegalArgumentException{
     public InvalidEmployeeIdException(String message){

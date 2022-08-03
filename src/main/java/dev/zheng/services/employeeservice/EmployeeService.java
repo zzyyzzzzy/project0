@@ -1,4 +1,4 @@
-package dev.zheng.services.employeeService;
+package dev.zheng.services.employeeservice;
 
 import dev.zheng.entities.Employee;
 

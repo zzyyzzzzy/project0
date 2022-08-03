@@ -1,4 +1,4 @@
-package dev.zheng.daos.employeeDAO;
+package dev.zheng.daos.employeedao;
 
 import dev.zheng.entities.Employee;
 
