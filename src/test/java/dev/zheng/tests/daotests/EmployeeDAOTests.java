@@ -78,10 +78,10 @@ public class EmployeeDAOTests {
     @Test
     @Order(6)
     void delete_employee_by_id_test(){
-       boolean isDeletedExist = employeeDao.deleteEmployee(1);
-       boolean isDeletedNotExist = employeeDao.deleteEmployee(4);
-       Assertions.assertTrue(isDeletedExist);
-       Assertions.assertFalse(isDeletedNotExist);
+       boolean deleteExistingEmployee = employeeDao.deleteEmployee(1);
+       boolean deleteNonExistingEmployee = employeeDao.deleteEmployee(4);
+       Assertions.assertTrue(deleteExistingEmployee);
+       Assertions.assertFalse(deleteNonExistingEmployee);
     }
 
     @AfterAll // runs after the last test finishes

@@ -4,6 +4,7 @@ import dev.zheng.entities.Employee;
 import dev.zheng.utils.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoPostgres implements EmployeeDAO{
@@ -49,16 +50,54 @@ public class EmployeeDaoPostgres implements EmployeeDAO{
 
     @Override
     public Employee getOneEmployee(int id) {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()) {
+            String sql = "select * from employee where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            Employee e = new Employee(rs.getInt("id"),
+                    rs.getString("fname"), rs.getString("lname"));
+            return e;
+
+        }catch(SQLException err){
+            err.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<Employee> getAllEmployees() {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "select * from employee";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            List<Employee> allEmployees = new ArrayList<>();
+            while(rs.next()){
+                Employee e = new Employee(rs.getInt("id"),
+                        rs.getString("fname"), rs.getString("lname"));
+                allEmployees.add(e);
+            }
+            return allEmployees;
+        }catch (SQLException err){
+            err.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public boolean deleteEmployee(int id) {
-        return false;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "delete from employee where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int deletedRecords = ps.executeUpdate();
+            return deletedRecords > 0;
+        }catch (SQLException err){
+            err.printStackTrace();
+            return false;
+        }
     }
 }
