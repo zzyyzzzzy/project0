@@ -1,6 +1,7 @@
 package dev.zheng.daos.expenseDAO;
 
 import dev.zheng.entities.Expense;
+import dev.zheng.entities.Status;
 
 import java.util.List;
 

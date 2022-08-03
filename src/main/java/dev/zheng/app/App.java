@@ -39,10 +39,10 @@ public class App {
         app.delete("/employees/{id}", deleteEmployeeHandler);
 
         //Expenses Routes
-        app.post("/expense", createExpenseHandler);
-        app.get("/expense/{id}", getExpenseByIdHandler);
-        app.get("/expense", getAllExpensesHandler);
-        app.put("/expense/{id}", updateExpenseHandler);
+        app.post("/expenses", createExpenseHandler);
+        app.get("/expenses/{id}", getExpenseByIdHandler);
+        app.get("/expenses/", getAllExpensesHandler);
+        app.put("/expenses/{id}", updateExpenseHandler);
 
         app.start();
     }

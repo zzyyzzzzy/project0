@@ -35,7 +35,8 @@ public class ExpenseDAOLocal implements ExpenseDAO {
     public List<Expense> getAllExpense() {
         Collection<Expense> allExpenseValues =  expenseTable.values();
         ArrayList<Expense> allExpense = new ArrayList<>(allExpenseValues);
-        return new ArrayList<>(allExpense);
+
+        return allExpense ;
     }
 
     @Override

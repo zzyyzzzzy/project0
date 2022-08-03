@@ -9,6 +9,7 @@ public interface ExpenseService {
 
     Expense retrieveExpenseById(int id);
     List<Expense> retrieveAllExpenses();
+    List<Expense> retrieveAllExpensesByStatus(String status);
     boolean removeExpense(int id);
     Expense modifyExpense(Expense e);
     Expense changeExpenseStatus(Expense e);

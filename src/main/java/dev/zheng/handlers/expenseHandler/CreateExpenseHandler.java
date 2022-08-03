@@ -3,11 +3,10 @@ package dev.zheng.handlers.expenseHandler;
 
 import com.google.gson.Gson;
 import dev.zheng.app.App;
-import dev.zheng.entities.Employee;
 import dev.zheng.entities.Expense;
-import dev.zheng.services.employeeService.exceptions.InvalidEmployeeIdException;
-import dev.zheng.services.expenseService.exceptions.EmptyDescriptionException;
-import dev.zheng.services.expenseService.exceptions.IllegalAmountException;
+import dev.zheng.services.employeeService.employeeExceptions.InvalidEmployeeIdException;
+import dev.zheng.services.expenseService.expenseExceptions.EmptyDescriptionException;
+import dev.zheng.services.expenseService.expenseExceptions.IllegalAmountException;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;

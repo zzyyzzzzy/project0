@@ -30,7 +30,7 @@ public class ExpenseDAOTests {
     void get_all_expense_test(){
         Expense e = new Expense(0, 2, 132, null, "hotel");
         expenseDAO.createExpense(e);
-        List<Expense> allExpense= expenseDAO.getAllExpense();
+        List<Expense> allExpense= expenseDAO.getAllExpense(null);
         Assertions.assertEquals(2, allExpense.size());
     }
     @Test
