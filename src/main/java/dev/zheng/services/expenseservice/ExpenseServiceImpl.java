@@ -68,7 +68,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public boolean removeExpense(int id) {
-        return false;
+        return expenseDAO.deleteExpense(id);
     }
 
     @Override
@@ -79,14 +79,27 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(oldExpense.getStatus() == Status.APPROVED || oldExpense.getStatus() == Status.DENIED){
             throw new UnModifiableExpenseException("This expense cannot be modified");
         }
-        // update request should not be able to change the status
-        // always change it to pending
-        e.setStatus(Status.PENDING);
         return expenseDAO.updateExpense(e);
     }
 
     @Override
-    public Expense changeExpenseStatus(Expense e) {
-        return null;
+    public Expense changeExpenseStatus(int id, String status) {
+        Expense oldExpense = expenseDAO.getOneExpense(id);
+        if(oldExpense == null){
+            throw new InvalidEmployeeIdException("invalid employee id");
+        }
+
+        Status actualStatus;
+        if (status.equalsIgnoreCase("approve")){
+            actualStatus = Status.APPROVED;
+        } else if (status.equalsIgnoreCase("deny")) {
+            actualStatus = Status.DENIED;
+        }else {
+            throw new InvalidStatusException("invalid status entered");
+        }
+        if(oldExpense.getStatus() != Status.PENDING){
+            throw new UnModifiableExpenseException("this expense cannot be changed");
+        }
+        return expenseDAO.patchExpense(id, actualStatus);
     }
 }

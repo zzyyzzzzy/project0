@@ -1,4 +1,4 @@
-package dev.zheng.handlers.employeeHandler;
+package dev.zheng.handlers.employeehandler;
 
 import dev.zheng.app.App;
 import io.javalin.http.Context;

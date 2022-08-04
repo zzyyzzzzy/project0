@@ -1,6 +1,7 @@
 package dev.zheng.daos.expensedao;
 
 import dev.zheng.entities.Expense;
+import dev.zheng.entities.Status;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface ExpenseDAO {
 
     // update
     Expense updateExpense(Expense e);
+    Expense patchExpense(int id, Status status);
 
     // read
     Expense getOneExpense(int id);

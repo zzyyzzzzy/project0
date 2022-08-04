@@ -1,4 +1,4 @@
-package dev.zheng.handlers.employeeHandler;
+package dev.zheng.handlers.employeehandler;
 
 import com.google.gson.Gson;
 import dev.zheng.app.App;

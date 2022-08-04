@@ -41,14 +41,24 @@ public class ExpenseDAOTests {
         Expense updatedExpense = expenseDAO.updateExpense(e);
         Assertions.assertEquals(300, updatedExpense.getAmount());
         Assertions.assertEquals(3, updatedExpense.getEmployeeId());
+        Assertions.assertEquals(Status.PENDING, updatedExpense.getStatus());
+    }
 
+    @Test
+    @Order(5)
+    void patch_expense_test(){
+        Expense updatedExpense = expenseDAO.patchExpense(1, Status.DENIED);
+        Assertions.assertEquals(Status.DENIED, updatedExpense.getStatus());
     }
 
 
     @Test
     @Order(5)
     void delete_expense_by_id_test(){
-
+        boolean deleteExistingExpense= expenseDAO.deleteExpense(1);
+        boolean deleteNonExistingExpense = expenseDAO.deleteExpense(4);
+        Assertions.assertTrue(deleteExistingExpense);
+        Assertions.assertFalse(deleteNonExistingExpense);
     }
 
 }

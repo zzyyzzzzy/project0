@@ -1,4 +1,4 @@
-package dev.zheng.handlers.expenseHandler;
+package dev.zheng.handlers.expensehandler;
 
 
 import com.google.gson.Gson;

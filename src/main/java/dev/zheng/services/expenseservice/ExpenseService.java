@@ -12,5 +12,5 @@ public interface ExpenseService {
     List<Expense> retrieveAllExpensesByStatus(String status);
     boolean removeExpense(int id);
     Expense modifyExpense(Expense e);
-    Expense changeExpenseStatus(Expense e);
+    Expense changeExpenseStatus(int id, String status);
 }

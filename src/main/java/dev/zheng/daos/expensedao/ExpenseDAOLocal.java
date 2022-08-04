@@ -21,6 +21,17 @@ public class ExpenseDAOLocal implements ExpenseDAO {
 
     @Override
     public Expense updateExpense(Expense e) {
+        // update request should not be able to change the status
+        // always change it to pending
+        e.setStatus(Status.PENDING);
+        expenseTable.put(e.getId(), e);
+        return e;
+    }
+
+    @Override
+    public Expense patchExpense(int id, Status status) {
+        Expense e = expenseTable.get(id);
+        e.setStatus(status);
         expenseTable.put(e.getId(), e);
         return e;
     }
@@ -40,6 +51,9 @@ public class ExpenseDAOLocal implements ExpenseDAO {
 
     @Override
     public boolean deleteExpense(int id) {
-        return false;
+        if(expenseTable.remove(id) == null){
+            return false;
+        };
+        return true;
     }
 }

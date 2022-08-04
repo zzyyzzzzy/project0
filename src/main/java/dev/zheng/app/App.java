@@ -2,11 +2,8 @@ package dev.zheng.app;
 
 import dev.zheng.daos.employeedao.EmployeeDAOLocal;
 import dev.zheng.daos.expensedao.ExpenseDAOLocal;
-import dev.zheng.handlers.employeeHandler.*;
-import dev.zheng.handlers.expenseHandler.CreateExpenseHandler;
-import dev.zheng.handlers.expenseHandler.GetAllExpensesHandler;
-import dev.zheng.handlers.expenseHandler.GetExpenseByIdHandler;
-import dev.zheng.handlers.expenseHandler.UpdateExpenseHandler;
+import dev.zheng.handlers.employeehandler.*;
+import dev.zheng.handlers.expensehandler.*;
 import dev.zheng.services.employeeservice.EmployeeService;
 import dev.zheng.services.employeeservice.EmployeeServiceImpl;
 import dev.zheng.services.expenseservice.ExpenseService;
@@ -30,6 +27,8 @@ public class App {
         GetExpenseByIdHandler getExpenseByIdHandler = new GetExpenseByIdHandler();
         GetAllExpensesHandler getAllExpensesHandler = new GetAllExpensesHandler();
         UpdateExpenseHandler updateExpenseHandler = new UpdateExpenseHandler();
+        DeleteExpenseHandler deleteExpenseHandler = new DeleteExpenseHandler();
+        PatchExpenseByIdHandler patchExpenseByIdHandler = new PatchExpenseByIdHandler();
 
         //Employees Routes
         app.post("/employees", createEmployeeHandler);
@@ -43,6 +42,8 @@ public class App {
         app.get("/expenses/{id}", getExpenseByIdHandler);
         app.get("/expenses/", getAllExpensesHandler);
         app.put("/expenses/{id}", updateExpenseHandler);
+        app.delete("/expenses/{id}", deleteExpenseHandler);
+        app.patch("/expenses/{id}/{status}", patchExpenseByIdHandler);
 
         app.start();
     }
