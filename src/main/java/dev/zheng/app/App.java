@@ -29,6 +29,8 @@ public class App {
         UpdateExpenseHandler updateExpenseHandler = new UpdateExpenseHandler();
         DeleteExpenseHandler deleteExpenseHandler = new DeleteExpenseHandler();
         PatchExpenseByIdHandler patchExpenseByIdHandler = new PatchExpenseByIdHandler();
+        GetExpensesByEmployeeIdHandler getExpensesByEmployeeIdHandler = new GetExpensesByEmployeeIdHandler();
+        CreateExpenseForEmployeeId createExpenseForEmployeeId = new CreateExpenseForEmployeeId();
 
         //Employees Routes
         app.post("/employees", createEmployeeHandler);
@@ -44,6 +46,8 @@ public class App {
         app.put("/expenses/{id}", updateExpenseHandler);
         app.delete("/expenses/{id}", deleteExpenseHandler);
         app.patch("/expenses/{id}/{status}", patchExpenseByIdHandler);
+        app.get("/employees/{id}/expenses", getExpensesByEmployeeIdHandler);
+        app.post("/employees/{id}/expenses", createExpenseForEmployeeId);
 
         app.start();
     }

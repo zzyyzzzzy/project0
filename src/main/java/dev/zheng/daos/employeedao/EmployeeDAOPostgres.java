@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDaoPostgres implements EmployeeDAO{
+public class EmployeeDAOPostgres implements EmployeeDAO{
 
     @Override
     public Employee createEmployee(Employee e) {

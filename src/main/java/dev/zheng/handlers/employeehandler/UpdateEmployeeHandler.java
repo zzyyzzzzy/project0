@@ -19,7 +19,11 @@ public class UpdateEmployeeHandler implements Handler{
         Gson gson = new Gson();
         String json = ctx.body();
         Employee e = gson.fromJson(json, Employee.class);
-        e.setId(id);
+        if(e.getId() != id){
+            ctx.status(400);
+            ctx.result("Make sure the id in the path is the same as the id in the request body");
+            return;
+        }
         Employee employeeSaved = App.employeeService.modifyEmployee(e);
         ctx.result(gson.toJson(employeeSaved));
 

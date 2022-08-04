@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dev.zheng.app.App;
 import dev.zheng.entities.Expense;
 import dev.zheng.services.employeeservice.employeeexceptions.InvalidEmployeeIdException;
+import dev.zheng.services.expenseservice.expenseexceptions.InvalidExpenseIdException;
 import dev.zheng.services.expenseservice.expenseexceptions.InvalidStatusException;
 import dev.zheng.services.expenseservice.expenseexceptions.UnModifiableExpenseException;
 import io.javalin.http.Context;
@@ -19,8 +20,8 @@ public class PatchExpenseByIdHandler implements Handler {
         try{
             Expense updatedExpense = App.expenseService.changeExpenseStatus(id, status);
             ctx.result(gson.toJson(updatedExpense));
-        } catch (InvalidEmployeeIdException e){
-            ctx.result("Employee id not found");
+        } catch (InvalidExpenseIdException e){
+            ctx.result("Expense id not found");
             e.printStackTrace();
         } catch(InvalidStatusException e){
             ctx.result("Cannot to change to a invalid status");

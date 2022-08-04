@@ -4,10 +4,7 @@ import dev.zheng.daos.expensedao.ExpenseDAO;
 import dev.zheng.entities.Expense;
 import dev.zheng.entities.Status;
 import dev.zheng.services.employeeservice.employeeexceptions.InvalidEmployeeIdException;
-import dev.zheng.services.expenseservice.expenseexceptions.EmptyDescriptionException;
-import dev.zheng.services.expenseservice.expenseexceptions.IllegalAmountException;
-import dev.zheng.services.expenseservice.expenseexceptions.InvalidStatusException;
-import dev.zheng.services.expenseservice.expenseexceptions.UnModifiableExpenseException;
+import dev.zheng.services.expenseservice.expenseexceptions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,6 +64,13 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
+    public List<Expense> retrieveAllExpensesByEmployeeId(int id) {
+        List<Expense> allExpenses = this.retrieveAllExpenses();
+        List<Expense> resultExpenses = allExpenses.stream().filter(e -> e.getEmployeeId() == id).collect(Collectors.toList());
+        return resultExpenses;
+    }
+
+    @Override
     public boolean removeExpense(int id) {
         return expenseDAO.deleteExpense(id);
     }
@@ -86,7 +90,7 @@ public class ExpenseServiceImpl implements ExpenseService{
     public Expense changeExpenseStatus(int id, String status) {
         Expense oldExpense = expenseDAO.getOneExpense(id);
         if(oldExpense == null){
-            throw new InvalidEmployeeIdException("invalid employee id");
+            throw new InvalidExpenseIdException("invalid expense id");
         }
 
         Status actualStatus;

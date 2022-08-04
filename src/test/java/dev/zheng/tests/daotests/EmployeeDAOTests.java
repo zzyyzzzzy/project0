@@ -1,7 +1,7 @@
 package dev.zheng.tests.daotests;
 
 import dev.zheng.daos.employeedao.EmployeeDAO;
-import dev.zheng.daos.employeedao.EmployeeDaoPostgres;
+import dev.zheng.daos.employeedao.EmployeeDAOPostgres;
 import dev.zheng.entities.Employee;
 import dev.zheng.utils.ConnectionUtil;
 import org.junit.jupiter.api.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeDAOTests {
 
-    static EmployeeDAO employeeDao = new EmployeeDaoPostgres();
+    static EmployeeDAO employeeDao = new EmployeeDAOPostgres();
 
     @BeforeAll // this method will execute before any tests ordered or unordered
     static void setup(){
@@ -31,7 +31,6 @@ public class EmployeeDAOTests {
         }catch (SQLException e){
             e.printStackTrace();
         }
-
     }
     @Test
     @Order(1)
