@@ -52,12 +52,35 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
     @Override
     public Expense patchExpense(int id, Status status) {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "update expense set status=? where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, status.toString());
+            ps.setInt(2, id);
+            ps.execute();
+            return getOneExpense(id);
+        } catch (SQLException err){
+            err.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public Expense getOneExpense(int id) {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "select * from expense where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            Expense e = new Expense(rs.getInt("id"), rs.getInt("employee_id"),
+                    rs.getDouble("amount"), Status.valueOf(rs.getString("status")),
+                    rs.getString("description"));
+            return e;
+        }catch (SQLException err){
+            err.printStackTrace();
+            return null;
+        }
     }
 
     @Override
