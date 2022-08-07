@@ -72,6 +72,10 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public boolean removeExpense(int id) {
+        Expense e = expenseDAO.getOneExpense(id);
+        if (e.getStatus() != Status.PENDING){
+            throw new UnModifiableExpenseException("Cannot delete a denied/approved expense");
+        }
         return expenseDAO.deleteExpense(id);
     }
 

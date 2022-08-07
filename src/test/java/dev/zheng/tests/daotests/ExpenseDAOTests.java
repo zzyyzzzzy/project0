@@ -54,7 +54,7 @@ public class ExpenseDAOTests {
     @Test
     @Order(3)
     void get_all_expense_test(){
-        Expense e = new Expense(0, 2, 132, null, "hotel");
+        Expense e = new Expense(0, 1, 132, null, "hotel");
         expenseDAO.createExpense(e);
         List<Expense> allExpense= expenseDAO.getAllExpense();
         Assertions.assertEquals(2, allExpense.size());

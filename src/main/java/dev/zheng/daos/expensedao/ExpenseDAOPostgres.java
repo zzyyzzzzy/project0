@@ -5,6 +5,7 @@ import dev.zheng.entities.Status;
 import dev.zheng.utils.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDAOPostgres implements ExpenseDAO {
@@ -43,6 +44,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             ps.setString(2, e.getDescription());
             ps.setInt(3, e.getId());
             ps.execute();
+            e.setStatus(Status.PENDING);
             return e;
         }catch (SQLException err){
             err.printStackTrace();
@@ -65,6 +67,11 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
         }
     }
 
+    private Expense expenseBuilder(ResultSet rs) throws SQLException{
+        return new Expense(rs.getInt("id"), rs.getInt("employee_id"),
+                rs.getDouble("amount"), Status.valueOf(rs.getString("status")),
+                rs.getString("description"));
+    }
     @Override
     public Expense getOneExpense(int id) {
         try(Connection conn = ConnectionUtil.createConnection()){
@@ -72,10 +79,8 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
-            Expense e = new Expense(rs.getInt("id"), rs.getInt("employee_id"),
-                    rs.getDouble("amount"), Status.valueOf(rs.getString("status")),
-                    rs.getString("description"));
+            rs.next();
+            Expense e = expenseBuilder(rs);
             return e;
         }catch (SQLException err){
             err.printStackTrace();
@@ -85,11 +90,33 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
     @Override
     public List<Expense> getAllExpense() {
-        return null;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "select * from expense";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<Expense> allExpenses = new ArrayList<>();
+            while(rs.next()){
+                Expense e = expenseBuilder(rs);
+                allExpenses.add(e);
+            }
+            return allExpenses;
+        } catch (SQLException err){
+            err.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public boolean deleteExpense(int id) {
-        return false;
+        try(Connection conn = ConnectionUtil.createConnection()){
+            String sql = "delete from expense where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int isDeleted = ps.executeUpdate();
+            return isDeleted > 0;
+        }catch (SQLException err){
+            err.printStackTrace();
+            return false;
+        }
     }
 }

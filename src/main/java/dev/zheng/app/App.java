@@ -1,7 +1,9 @@
 package dev.zheng.app;
 
 import dev.zheng.daos.employeedao.EmployeeDAOLocal;
+import dev.zheng.daos.employeedao.EmployeeDAOPostgres;
 import dev.zheng.daos.expensedao.ExpenseDAOLocal;
+import dev.zheng.daos.expensedao.ExpenseDAOPostgres;
 import dev.zheng.handlers.employeehandler.*;
 import dev.zheng.handlers.expensehandler.*;
 import dev.zheng.services.employeeservice.EmployeeService;
@@ -11,8 +13,8 @@ import dev.zheng.services.expenseservice.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
 public class App {
-    public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOLocal());
-    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOLocal());
+    public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOPostgres());
+    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgres());
     public static void main(String[] args) {
         Javalin app = Javalin.create();
         //Employee handlers

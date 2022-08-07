@@ -24,7 +24,7 @@ public class UpdateExpenseHandler implements Handler {
         Expense e = gson.fromJson(ctx.body(), Expense.class);
         if(e.getId() != id){
             ctx.status(400);
-            ctx.result("Make sure the id in the path is the same as the id in the request body");
+            ctx.result("Make sure the expense ID in the path is the same as the ID in the request body");
             return;
         }
         try{

@@ -18,7 +18,7 @@ public class CreateExpenseForEmployeeId implements Handler {
         Expense expense = gson.fromJson(ctx.body(), Expense.class);
         if(expense.getEmployeeId() != id){
             ctx.status(400);
-            ctx.result("Make sure the id in the path is the same as the id in the request body");
+            ctx.result("Make sure the employee ID in the path is the same as the ID in the request body");
             return;
         }
         try{
