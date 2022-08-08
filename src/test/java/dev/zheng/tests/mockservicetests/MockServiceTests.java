@@ -24,7 +24,6 @@ public class MockServiceTests {
         expenses.add(new Expense(2, 2, 200, Status.PENDING, "hotel"));
         expenses.add(new Expense(3, 1, 100, Status.DENIED, "car"));
         expenses.add(new Expense(4, 3, 100, Status.DENIED, "rent"));
-
         Mockito.when(expenseDAO.getAllExpense()).thenReturn(expenses);
 
         ExpenseService expenseService = new ExpenseServiceImpl(expenseDAO);
