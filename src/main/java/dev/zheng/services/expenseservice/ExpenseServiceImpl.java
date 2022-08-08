@@ -14,7 +14,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     public ExpenseServiceImpl(ExpenseDAO expenseDAO){this.expenseDAO = expenseDAO;}
     private void checkNullAndAmount(Expense e){
-        if (e.getDescription() == null){
+        if (e.getDescription() == null || e.getDescription().length() == 0){
             throw new EmptyDescriptionException("The description cannot be empty");
         }
         if(e.getAmount() <= 0){
@@ -72,6 +72,9 @@ public class ExpenseServiceImpl implements ExpenseService{
     @Override
     public boolean removeExpense(int id) {
         Expense e = expenseDAO.getOneExpense(id);
+        if (e == null){
+            return false;
+        }
         if (e.getStatus() != Status.PENDING){
             throw new UnModifiableExpenseException("Cannot delete a denied/approved expense");
         }
