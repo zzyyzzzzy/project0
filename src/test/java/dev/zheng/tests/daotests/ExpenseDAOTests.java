@@ -78,7 +78,7 @@ public class ExpenseDAOTests {
 
 
     @Test
-    @Order(5)
+    @Order(6)
     void delete_expense_by_id_test(){
         boolean deleteExistingExpense= expenseDAO.deleteExpense(1);
         boolean deleteNonExistingExpense = expenseDAO.deleteExpense(4);
