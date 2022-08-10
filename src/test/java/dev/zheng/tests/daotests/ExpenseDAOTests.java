@@ -85,15 +85,15 @@ public class ExpenseDAOTests {
         Assertions.assertTrue(deleteExistingExpense);
         Assertions.assertFalse(deleteNonExistingExpense);
     }
-    @AfterAll // runs after the last test finishes
-    static void teardown(){
-        try(Connection connection = ConnectionUtil.createConnection()){
-            String sql = "drop table expense";
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-    }
+//    @AfterAll // runs after the last test finishes
+//    static void teardown(){
+//        try(Connection connection = ConnectionUtil.createConnection()){
+//            String sql = "drop table expense";
+//            Statement statement = connection.createStatement();
+//            statement.execute(sql);
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 }

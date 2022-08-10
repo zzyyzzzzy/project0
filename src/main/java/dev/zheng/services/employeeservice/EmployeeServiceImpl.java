@@ -14,7 +14,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     private void checkNullName(Employee e){
-        if (e.getFname() == null || e.getLname() == null){
+        if (e.getFname() == null || e.getLname() == null
+                || e.getLname().length() == 0 || e.getFname().length() == 0){
             throw new NullNameException("Name cannot be empty");
         }
     }
@@ -42,6 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee modifyEmployee(Employee e) {
+        checkNullName(e);
         employeeDAO.updateEmployee(e);
         return e;
     }

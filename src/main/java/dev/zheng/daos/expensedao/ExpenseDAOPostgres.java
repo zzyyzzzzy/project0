@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDAOPostgres implements ExpenseDAO {
+
+    private Expense expenseBuilder(ResultSet rs) throws SQLException{
+        return new Expense(rs.getInt("id"), rs.getInt("employee_id"),
+                rs.getDouble("amount"), Status.valueOf(rs.getString("status")),
+                rs.getString("description"));
+    }
     @Override
     public Expense createExpense(Expense e) {
         try(Connection conn = ConnectionUtil.createConnection()){
@@ -45,13 +51,12 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             ps.setInt(3, e.getId());
             ps.execute();
             e.setStatus(Status.PENDING);
-            return e;
+            return getOneExpense(e.getId());
         }catch (SQLException err){
             err.printStackTrace();
             return null;
         }
     }
-
     @Override
     public Expense patchExpense(int id, Status status) {
         try(Connection conn = ConnectionUtil.createConnection()){
@@ -67,11 +72,6 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
         }
     }
 
-    private Expense expenseBuilder(ResultSet rs) throws SQLException{
-        return new Expense(rs.getInt("id"), rs.getInt("employee_id"),
-                rs.getDouble("amount"), Status.valueOf(rs.getString("status")),
-                rs.getString("description"));
-    }
     @Override
     public Expense getOneExpense(int id) {
         try(Connection conn = ConnectionUtil.createConnection()){

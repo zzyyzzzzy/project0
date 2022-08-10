@@ -77,22 +77,22 @@ public class EmployeeDAOTests {
     @Test
     @Order(6)
     void delete_employee_by_id_test(){
-       boolean deleteExistingEmployee = employeeDao.deleteEmployee(1);
+       boolean deleteExistingEmployee = employeeDao.deleteEmployee(2);
        boolean deleteNonExistingEmployee = employeeDao.deleteEmployee(4);
        Assertions.assertTrue(deleteExistingEmployee);
        Assertions.assertFalse(deleteNonExistingEmployee);
     }
 
-    @AfterAll // runs after the last test finishes
-    static void teardown(){
-        try(Connection connection = ConnectionUtil.createConnection()){
-            String sql = "drop table employee";
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-    }
+//    @AfterAll // runs after the last test finishes
+//    static void teardown(){
+//        try(Connection connection = ConnectionUtil.createConnection()){
+//            String sql = "drop table employee";
+//            Statement statement = connection.createStatement();
+//            statement.execute(sql);
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 }

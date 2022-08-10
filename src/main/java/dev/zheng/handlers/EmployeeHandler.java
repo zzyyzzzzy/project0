@@ -58,8 +58,13 @@ public class EmployeeHandler {
             ctx.result("Could not find the employee to be updated");
             return;
         }
-        Employee employeeSaved = employeeService.modifyEmployee(e);
-        ctx.result(gson.toJson(employeeSaved));
+        try{
+            Employee employeeSaved = employeeService.modifyEmployee(e);
+            ctx.result(gson.toJson(employeeSaved));
+        }catch (NullNameException err){
+            ctx.status(400);
+            ctx.result("First/last name should not be empty");
+        }
     };
 
     public Handler deleteEmployee = ctx -> {
